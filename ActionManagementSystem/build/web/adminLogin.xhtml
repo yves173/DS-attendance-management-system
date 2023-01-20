@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>SIGN IN</title>
+        <link rel="stylesheet" href="css/clientLogin.css" type="text/css"/>
+    </h:head>
+    <h:body>
+        <br/>
+        <br/>
+        <div class="cont">
+            <h:form>
+                <div class="form sign-in">
+                    <h2>Admin Login</h2>
+                    <label>
+                        <span>Email</span>
+                        <h:inputText value="#{utd.registra.email}"/>
+                    </label>
+                    <label>
+                        <span>Password</span>
+                        <h:inputSecret value="#{utd.registra.password}"/>
+                    </label>
+                    <p class="forgot-pass">Forgot password?</p>
+                    
+                    <button type="button" class="submit"><h:commandButton value="SIGN IN" action="#{utd.checkRegistraLogin_()}"/></button>
+                    
+                    <!--<h:button  value="submit" class="submit"></h:button>-->
+                    <br/>
+                    <h:messages style="color: tomato" class="center-msg"/>
+                </div>
+            
+            <div class="sub-cont">
+                <div class="img">
+                    
+                </div>
+            </div>
+            </h:form>
+        </div>
+    </h:body>
+</html>
+

@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Update Student</title>
+        <link rel="stylesheet" href="css/clientLogin.css" type="text/css"/>
+    </h:head>
+    <h:body>
+        <br/>
+        <br/>
+        <div class="cont">
+            <h:form enctype="multipart/form-data">
+                <div class="form sign-in">
+                    <h2>Student Update</h2>
+
+                    <label>
+                        <span>FistName</span>
+                        <h:inputText value="#{utd.student.firstName}" required="true" requiredMessage="fill first name"/>
+                    </label>
+                    <label>
+                        <span>LastName</span>
+                        <h:inputText value="#{utd.student.lastName}" required="true" requiredMessage="fill last name"/>
+                    </label>
+                    <label>
+                        <span>Email</span>
+                        <h:inputText value="#{utd.student.email}" required="true" requiredMessage="fill  email"/>
+                    </label>
+                    <label>
+                        <span>Phone</span>
+                        <h:inputText value="#{utd.student.phoneNumber}" required="true" requiredMessage="fill phone number"/>
+                    </label>
+                    <label>
+                        <span>Date Of Birth</span>
+                        <h:inputText value="#{utd.birthDate}" required="true" requiredMessage="fill date of birth">
+                            <f:convertDateTime pattern="dd-MM-yyyy"/>
+                        </h:inputText>
+                    </label>
+                    <label>
+                        <span>Gender</span>
+                        <h:selectOneMenu value="#{utd.student.gender}">
+                            <f:selectItem itemValue="male" itemLabel="male"/>
+                            <f:selectItem itemValue="female" itemLabel="female"/>
+                        </h:selectOneMenu>
+                    </label>
+                    <label>
+                        <span>Password</span>
+                        <h:inputText value="#{utd.student.password}" required="true" requiredMessage="fill password"/>
+                    </label>
+                    
+                    
+                </div>
+                <div class="sub-cont">
+                    <div class="img">
+                        
+                        <div class="img__btn">
+                            <span class="m--up">NEXT</span>
+                            <span class="m--in">GO BACK</span>
+                        </div>
+                        <br/><br/>
+                        <h:link outcome = "dashboard/adminDashboard.xhtml">
+                        <div class="img__btn">
+                            <span class="m--up">DashBoard</span>
+                            <span class="m--in">DashBoard</span>
+                        </div>
+                        </h:link>
+                    </div>
+                    <div class="form sign-up">
+                        <h2>Create your Account</h2>
+                        <label>
+                            <span>Registration Date</span>
+                            <h:inputText value="#{utd.student.registrionDate}" readonly="true">
+                                <f:convertDateTime pattern="dd-MM-yyyy"/>
+                            </h:inputText>
+                        </label>
+
+                        <label>
+                            <span>Location to study</span>
+                            <h:selectOneMenu value="#{utd.locat}" >
+                                <f:selectItems value="#{utd.retrieveAllLocation_()}" var="loc" itemLabel="#{loc.district}" itemValue="#{loc.district}"/>
+                            </h:selectOneMenu>
+                        </label>
+                        <label>
+                            <span>What are you looking for</span>
+
+                            <h:selectOneMenu value="#{utd.categoryType}" id="catg_type">
+                                <f:selectItem itemValue="temporary permit" itemLabel="Temporary permit"/>
+                                <f:selectItem itemValue="driving license" itemLabel="Driving License"/>
+                                <f:ajax event="mouseup" listener="#{utd.categoryList_()}" execute="catg_type" render="catg_val"/>
+                            </h:selectOneMenu>
+                        </label>
+                        <label>
+                            <span>Select a category</span>
+
+                            <h:selectOneMenu value="#{utd.student.category}" id="catg_val">
+                                <f:selectItems value="#{utd.categoryList_()}" var="ctg" itemValue="#{ctg}"/>
+                            </h:selectOneMenu>
+                        </label>
+                        
+                        <button type="button" class="submit"><h:commandButton value="UPDATE" action="#{utd.updateStudent_()}"/></button>
+                        <h:messages style="color: red" class="center-msg"/>
+                    </div>
+                </div>
+            </h:form>
+            <h:messages/>
+        </div>
+
+        <script>
+            document.querySelector('.img__btn').addEventListener('click', function () {
+                document.querySelector('.cont').classList.toggle('s--signup');
+            });
+        </script>
+    </h:body>
+</html>
+

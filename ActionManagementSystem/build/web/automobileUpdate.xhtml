@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>AutoMobile Update</title>
+        <link rel="stylesheet" href="css/clientLogin.css" type="text/css"/>
+    </h:head>
+    <h:body>
+        <br/>
+        <br/>
+        <div class="cont">
+            <h:form>
+                <div class="form sign-in">
+                    <h2>AutoMobile Update Form</h2>
+                    <label>
+                        <span>Plate Number</span>
+                        <h:inputText value="#{utd.autoMobile.plateNumber}"/>
+                    </label>
+
+                    <label>
+                        <span>Owner</span>
+                        <h:selectOneMenu value="#{utd.automobileOwner}">
+                            <f:selectItems value="#{utd.retrieveAllMember_()}" var="mbr" itemLabel="#{mbr.firstName} #{mbr.lastName}" itemValue="#{mbr.email}"/>
+                        </h:selectOneMenu>
+                    </label>
+                    <label>
+                        <span>Type</span>
+                        <h:inputText value="#{utd.autoMobile.type}" id="typ" readonly="true"/>
+                    </label>
+                    <label>
+                        <span>Category</span>
+                        <h:selectOneMenu value="#{utd.autoMobile.category}" id="ctg">
+                            <f:selectItem itemValue="A" itemLabel="select categoty" noSelectionOption="true"/>
+                            <f:selectItem itemValue="A" itemLabel="A"/>
+                            <f:selectItem itemValue="B" itemLabel="B"/>
+                            <f:selectItem itemValue="C" itemLabel="C"/>
+                            <f:selectItem itemValue="D" itemLabel="D"/>
+                            <f:selectItem itemValue="E" itemLabel="E"/>
+                            <f:ajax event="mouseup" listener="#{utd.changeCarType_()}" execute="ctg" render="typ"/>
+                        </h:selectOneMenu>
+
+                    </label>
+
+                    <label>
+                        <span>Location</span>
+                        <h:selectOneMenu value="#{utd.automobileDistrict}">
+                            <f:selectItems value="#{utd.retrieveAllLocation_()}" var="loc" itemLabel="#{loc.district}" itemValue="#{loc.district}"/>
+                        </h:selectOneMenu>
+                    </label>
+                    <label>
+                        <span>Registration Date</span>
+                        <h:inputText value="#{utd.autoMobile.registrionDate}" readonly="true">
+                            <f:convertDateTime pattern="dd-MM-yyyy"/>
+                        </h:inputText>
+                    </label>
+                    <label>
+                        <button type="submit" class="submit"><h:commandButton value="UPDATE" action="#{utd.updateAutoMobile_()}"/></button>         
+                    </label>
+
+                </div>
+            </h:form>
+        </div>
+
+        <script>
+            document.querySelector('.img__btn').addEventListener('click', function () {
+                document.querySelector('.cont').classList.toggle('s--signup');
+            });
+        </script>
+    </h:body>
+</html>
+
